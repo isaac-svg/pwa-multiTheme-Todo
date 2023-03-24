@@ -1,14 +1,36 @@
-import React, { FormEvent, MouseEvent, useRef, useState } from "react";
+import React, {
+  FormEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import "./App.css";
-interface Todo {
-  id: number;
-  completed: boolean;
-  content: string;
-}
+import { Header } from "./components/Header";
+import TodoComponent from "./components/TodoComponent.js";
+import TodoForm from "./components/TodoForm";
+import TodoInfo from "./components/TodoInfo.js";
+import { Todo } from "./models/Todo";
 const App = () => {
   const taskRef = useRef<HTMLInputElement>(null);
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [allowSave, setAllowSave] = useState<boolean>(false);
   const [lightTheme, setLigthTheme] = useState(false);
+  // gets and set todos from local storage
+  useEffect(() => {
+    let localTodos: string | null = localStorage.getItem("todos");
+    if (!localTodos) {
+      let emptyTodos: Todo[] = [];
+      setTodos(emptyTodos);
+      return;
+    }
+    setTodos(JSON.parse(localTodos));
+  }, []);
+
+  // set Todos to localStorage
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
   const populateTodo = (e: FormEvent) => {
     e.preventDefault();
     if (!taskRef.current!.value) {
@@ -20,11 +42,12 @@ const App = () => {
       content: taskRef.current!.value,
     };
     setTodos((prevState) => {
+      // setAllowSave(!allowSave);
       return [...prevState, task];
     });
+
     taskRef.current!.value = "";
     taskRef.current!.focus();
-    console.log(todos);
   };
   const deleteTodo = (e: MouseEvent) => {
     const elem = e.target as HTMLImageElement;
@@ -41,14 +64,18 @@ const App = () => {
       }
       return todo;
     });
+
+    localStorage.setItem("completedTodos", JSON.stringify(modifiedTodo));
     setTodos(modifiedTodo);
   };
   const clearCompleted = () => {
     const newTodos = todos.filter((todo) => todo.completed === false);
     setTodos(newTodos);
+    localStorage.setItem("completedTodos", JSON.stringify(newTodos));
   };
   const getAllTodos = () => {
-    const allTodos = todos.map((todo) => todo);
+    const localTodos = localStorage.getItem("todos")!;
+    const allTodos = JSON.parse(localTodos);
     setTodos(allTodos);
   };
   const getCompleted = () => {
@@ -70,99 +97,20 @@ const App = () => {
       <div id="section">
         {/* Todo Component */}
         <div className="todo__component">
-          <div className="header">
-            <span className="logo">TODO</span>
-            <span className="theme_img--wrapper">
-              {lightTheme ? (
-                <img
-                  className="theme__img"
-                  src="/public/images/icon-moon.svg"
-                  onClick={toggleTheme}
-                />
-              ) : (
-                <img
-                  className="theme__img"
-                  src="/public/images/icon-sun.svg"
-                  onClick={toggleTheme}
-                />
-              )}
-            </span>
-          </div>
-          <form id="form__input" onSubmit={populateTodo}>
-            <div className="form__controller">
-              <span className="circle"></span>
-              <input
-                type="text"
-                id="input__field"
-                placeholder="Create a  new todo..."
-                ref={taskRef}
-              />
-            </div>
-          </form>
-          <div className="todos">
-            <ul>
-              {todos.map((todo) => {
-                return (
-                  <li className="single__todo">
-                    <div
-                      className="box__wrapper"
-                      id={todo.completed ? "completed_wrapper" : ""}
-                      key={todo.id}
-                    >
-                      <input
-                        type="checkbox"
-                        onClick={() => handleComplete(todo.id)}
-                      />
-
-                      <img
-                        className={`check__img  ${
-                          todo.completed && "completed__img"
-                        }`}
-                        src="/public/images/icon-check.svg"
-                      />
-                    </div>
-
-                    <p
-                      className={
-                        todo.completed ? "completed__todo" : "todo__msg"
-                      }
-                    >
-                      {todo.content}
-                    </p>
-
-                    <img
-                      src="/images/icon-cross.svg"
-                      className="del__img"
-                      onClick={deleteTodo}
-                      data-id={todo.id}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="todos__count">
-            <span className="count">
-              {todos.length} {todos.length < 2 ? "item" : "items"} left
-            </span>
-            <button className="clear__completed" onClick={clearCompleted}>
-              {todos.some((todo) => todo.completed)
-                ? "Clear Completed"
-                : "None Completed"}
-            </button>
-          </div>
-          {/* filters  */}
-          <div className="filters">
-            <button className="all" onClick={getAllTodos}>
-              All
-            </button>
-            <button className="active" onClick={getActive}>
-              Active
-            </button>
-            <button className="completed" onClick={getCompleted}>
-              Completed
-            </button>
-          </div>
+          <Header lightTheme={lightTheme} toggleTheme={toggleTheme} />
+          <TodoForm taskRef={taskRef} populateTodo={populateTodo} />
+          <TodoComponent
+            todos={todos}
+            handleComplete={handleComplete}
+            deleteTodo={deleteTodo}
+          />
+          <TodoInfo
+            getAllTodos={getAllTodos}
+            getCompleted={getCompleted}
+            getActive={getActive}
+            clearCompleted={clearCompleted}
+            todos={todos}
+          />
         </div>
       </div>
     </main>

@@ -1,4 +1,5 @@
 :root {
+  --transition: all 300ms linear;
   --bright-blue: hsl(220, 98%, 61%);
   --check-background: linear-gradient(
     90deg,
@@ -57,7 +58,7 @@ img {
   background-color: var(--very-dark-blue);
   position: relative;
   max-height: auto;
-  transition: all 500ms linear;
+  transition: var(--transition);
 }
 .banner__wrapper {
   background-image: url("/public/images/bg-mobile-dark.jpg");
@@ -185,6 +186,8 @@ input[type="checkbox"]:not(:checked) {
   align-items: center;
   padding: 1rem;
   border-radius: 0.35rem;
+  transition: var(--transition);
+
   background-color: var(--very-dark-desaturated-blue);
 }
 ul li {
@@ -199,7 +202,6 @@ del {
   padding-left: 1.5rem;
   font-size: clamp(1.2rem, 1vw + 1rem, 1.7rem);
   color: var(--Light-grayish-blue);
-
   overflow: scroll;
   word-wrap: break-word;
 }
