@@ -1,4 +1,5 @@
 :root {
+  --bright-blue: hsl(220, 98%, 61%);
   --check-background: linear-gradient(
     90deg,
     hsl(192, 100%, 67%),
@@ -8,7 +9,7 @@
 
   --very-light-gray: hsl(0, 0%, 98%);
   --very-light-grayish-blue: hsl(236, 33%, 92%);
-  --Ligh-grayish-blue: hsl(233, 11%, 84%);
+  --Light-grayish-blue: hsl(233, 11%, 84%);
   --Dark-grayish-blue: hsl(236, 9%, 61%);
   --very-Dark-Grayish-blue: hsl(235, 19%, 35%);
 
@@ -33,12 +34,30 @@ html {
 img {
   cursor: pointer;
 }
-
+/* light Theme */
+.main.light {
+  /* background-color: rebeccapurple; */
+  --very-dark-desaturated-blue: var(--very-light-gray);
+  /*  */
+  background-color: var(--very-light-grayish-blue);
+  --very-Dark-Grayish-blue: var(--very-light-grayish-blue);
+  --light-grayish-blue: var(--Dark-grayish-blue);
+  --Light-grayish-blue: var(--Dark-grayish-blue);
+}
+.main.light .single__todo .todo__msg {
+  color: var(--Dark-grayish-blue);
+}
+.main.light .single__todo .completed__todo {
+  color: var(--Light-grayish-blue);
+}
+/* .main.light  */
+/* End of ligth theme */
 .main {
   height: 100vh;
   background-color: var(--very-dark-blue);
   position: relative;
   max-height: auto;
+  transition: all 500ms linear;
 }
 .banner__wrapper {
   background-image: url("/public/images/bg-mobile-dark.jpg");
@@ -54,7 +73,7 @@ img {
   max-height: auto;
   width: min(90%, 900px);
   position: fixed;
-  top: 60%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -111,7 +130,12 @@ img {
   border-radius: 50%;
   height: 2.5rem;
   width: 2.5rem;
+  z-index: 10;
   /* border: 2px solid var(--Dark-grayish-blue); */
+}
+
+#completed_wrapper {
+  background-color: var(--check-background);
 }
 .check__img {
   position: absolute;
@@ -119,9 +143,15 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1.25rem;
+  z-index: 20;
   display: none;
-  z-index: 0;
   border: none;
+}
+/* .check__img.incomplete_img {
+  display: none;
+} */
+.check__img.completed__img {
+  display: block;
 }
 input[type="checkbox"] {
   -webkit-appearance: none;
@@ -130,7 +160,7 @@ input[type="checkbox"] {
   width: 2.5rem;
   border: 2px solid var(--Dark-grayish-blue);
   border-radius: 50%;
-  z-index: 10;
+  z-index: 100;
   cursor: pointer;
   background: transparent;
 }
@@ -139,12 +169,13 @@ input[type="checkbox"]:checked {
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
+  z-index: 100;
   /* border: 2px solid var(--Dark-grayish-blue); */
 }
-input[type="checkbox"]:checked,
+/* input[type="checkbox"]:checked,
 .check__img {
   display: block;
-}
+} */
 input[type="checkbox"]:not(:checked) {
   background: transparent;
 }
@@ -156,21 +187,80 @@ input[type="checkbox"]:not(:checked) {
   border-radius: 0.35rem;
   background-color: var(--very-dark-desaturated-blue);
 }
-ul li:not(:last-of-type) {
+ul li {
   border-bottom: 1px solid var(--very-Dark-Grayish-blue);
+}
+/* del */
+del {
+  color: var(--light-grayish-blue-hover);
 }
 .single__todo .todo__msg {
   flex: 1;
   padding-left: 1.5rem;
   font-size: clamp(1.2rem, 1vw + 1rem, 1.7rem);
-  /* color: red; */
-  color: var(--light-grayish-blue);
-}
+  color: var(--Light-grayish-blue);
 
+  overflow: scroll;
+  word-wrap: break-word;
+}
+.single__todo .completed__todo {
+  text-decoration: line-through;
+  text-decoration-color: var(--Light-grayish-blue);
+  color: var(--Dark-grayish-blue);
+  padding-left: 1.5rem;
+  font-size: clamp(1.2rem, 1vw + 1rem, 1.7rem);
+  flex: 1;
+}
 .todos {
-  background-color: var(--very-dark-grayish-blue);
   height: max-content;
-  max-height: 60vh;
+  max-height: 50vh;
   overflow: scroll;
   border-radius: 0.35rem;
+}
+
+/* todos count number of todos and clear completed */
+.todos__count {
+  display: flex;
+  background-color: var(--very-dark-desaturated-blue);
+  justify-content: space-between;
+  padding: 1.5rem;
+  font-size: clamp(1.2rem, 1vw + 1rem, 1.7rem);
+  color: var(--Light-grayish-blue);
+  border-radius: 0.4rem;
+  border-top: 1px solid var(--very-Dark-Grayish-blue);
+}
+.todos__count .clear__completed {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--Light-grayish-blue);
+}
+/*  filters component */
+.filters {
+  /* position: fixed; */
+  /* bottom: 2rem; */
+  margin-top: 2rem;
+  background-color: var(--very-dark-desaturated-blue);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.filters button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--Light-grayish-blue);
+  font-weight: 500;
+  background: transparent;
+  outline: none;
+  border: none;
+}
+
+.filters button:focus {
+  color: var(--bright-blue);
 }
