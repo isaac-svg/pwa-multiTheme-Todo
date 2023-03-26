@@ -31,11 +31,11 @@ Users should be able to:
 
 ### Screenshot
 
-![Mobile Light Theme](/screenshots/mobile1.png)
-![Mobile Dark Theme](/screenshots/mobile2.png)
-![Desktop Dark Theme](/screenshots/mobile2.png)
-![Desktop Light Theme](/screenshots/mobile3.png)
-![GIF](screenshots/mobile.gif)
+![Mobile Light Theme](./screenshots/mobile1.png)
+![Mobile Dark Theme](./screenshots/mobile2.png)
+![Desktop Dark Theme](./screenshots/mobile2.png)
+![Desktop Light Theme](./screenshots/mobile3.png)
+![GIF](/screenshots/mobile.gif)
 
 ### Links
 
