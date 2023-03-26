@@ -39,8 +39,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [](https://pwa-multi-theme-todo.vercel.app/)
-- Live Site URL: [](https://pwa-multi-theme-todo.vercel.app/)
+- Solution URL: [view](https://pwa-multi-theme-todo.vercel.app/)
+- Live Site URL: [view](https://pwa-multi-theme-todo.vercel.app/)
 
 ## My process
 
