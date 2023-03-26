@@ -33,9 +33,9 @@ Users should be able to:
 
 ![Mobile Light Theme](./public/screenshots/mobile1.png)
 ![Mobile Dark Theme](./public/screenshots/mobile2.png)
-![Desktop Dark Theme](./public/screenshots/mobile2.png)
-![Desktop Light Theme](./public/screenshots/mobile3.png)
-![GIF](/screenshots/mobile.gif)
+![Desktop Dark Theme](./public/screenshots/mobile3.png)
+![Desktop Light Theme](./public/screenshots/mobile4.png)
+![GIF](./public/screenshots/mobile.gif)
 
 ### Links
 
