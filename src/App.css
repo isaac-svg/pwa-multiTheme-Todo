@@ -51,8 +51,10 @@ img {
 .main.light .single__todo .completed__todo {
   color: var(--Light-grayish-blue);
 }
-/* .main.light  */
-/* End of ligth theme */
+.main.light .banner__wrapper {
+  background-image: url("/public/images/bg-desktop-light.jpg");
+}
+/* End of light theme */
 .main {
   height: 100vh;
   background-color: var(--very-dark-blue);
@@ -61,10 +63,8 @@ img {
   transition: var(--transition);
 }
 .banner__wrapper {
-  background-image: url("/public/images/bg-mobile-dark.jpg");
-  /* background-position: contain; */
+  background-image: url("/public/images/bg-desktop-dark.jpg");
   background-size: 100% 100%;
-  /* object-fit: contain; */
   background-repeat: no-repeat;
   height: 30vh;
 }
@@ -187,6 +187,7 @@ input[type="checkbox"]:not(:checked) {
   padding: 1rem;
   border-radius: 0.35rem;
   transition: var(--transition);
+  cursor: move;
 
   background-color: var(--very-dark-desaturated-blue);
 }
@@ -202,8 +203,9 @@ del {
   padding-left: 1.5rem;
   font-size: clamp(1.2rem, 1vw + 1rem, 1.7rem);
   color: var(--Light-grayish-blue);
-  overflow: scroll;
-  word-wrap: break-word;
+  /* overflow: scroll; */
+  /* word-wrap: break-word; */
+  word-break: break-all;
 }
 .single__todo .completed__todo {
   text-decoration: line-through;
@@ -216,7 +218,7 @@ del {
 .todos {
   height: max-content;
   max-height: 50vh;
-  overflow: scroll;
+  overflow-y: scroll;
   border-radius: 0.35rem;
 }
 
@@ -265,4 +267,24 @@ del {
 
 .filters button:focus {
   color: var(--bright-blue);
+}
+
+.info__draggable {
+  position: absolute;
+  bottom: 1.5rem;
+  color: var(--Light-grayish-blue);
+  font-size: clamp(1.2rem, 1vw + 1rem, 2rem);
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 620px) {
+  .main .banner__wrapper {
+    background-image: url(/public/images/bg-mobile-dark.jpg);
+  }
+  .main.light .banner__wrapper {
+    background-image: url(/public/images/bg-mobile-light.jpg);
+  }
 }

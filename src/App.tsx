@@ -19,18 +19,20 @@ const App = () => {
   // gets and set todos from local storage
   useEffect(() => {
     let localTodos: string | null = localStorage.getItem("todos");
+    let theme: string = localStorage.getItem("todoTheme") || "true";
     if (!localTodos) {
       let emptyTodos: Todo[] = [];
       setTodos(emptyTodos);
       return;
     }
+    setLigthTheme(JSON.parse(theme));
     setTodos(JSON.parse(localTodos));
   }, []);
 
   // set Todos to localStorage
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+    localStorage.setItem("todoTheme", JSON.stringify(lightTheme));
+  }, [lightTheme]);
   const populateTodo = (e: FormEvent) => {
     e.preventDefault();
     if (!taskRef.current!.value) {
@@ -43,8 +45,10 @@ const App = () => {
     };
     setTodos((prevState) => {
       // setAllowSave(!allowSave);
+
       return [...prevState, task];
     });
+    localStorage.setItem("todos", JSON.stringify(todos));
 
     taskRef.current!.value = "";
     taskRef.current!.focus();
@@ -53,19 +57,23 @@ const App = () => {
     const elem = e.target as HTMLImageElement;
     const id = elem.dataset.id!;
     const newTodos = todos.filter((todo) => todo.id !== parseInt(id));
+
     setTodos(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
   const handleComplete = (id: number): void => {
-    const modifiedTodo = todos.map((todo) => {
+    let completedTodos: Todo[] = [];
+    const modifiedTodo = todos.filter((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
         console.log(todo.completed);
         console.log(todo);
       }
+
       return todo;
     });
-
-    localStorage.setItem("completedTodos", JSON.stringify(modifiedTodo));
+    completedTodos = modifiedTodo.filter((todo) => todo.completed === true);
+    localStorage.setItem("completedTodos", JSON.stringify(completedTodos));
     setTodos(modifiedTodo);
   };
   const clearCompleted = () => {
@@ -79,12 +87,12 @@ const App = () => {
     setTodos(allTodos);
   };
   const getCompleted = () => {
-    const allTodos = todos.filter((todo) => todo.completed === true);
+    const allTodos = JSON.parse(localStorage.getItem("completedTodos")!);
     setTodos(allTodos);
   };
   const getActive = () => {
     const allTodos = todos.filter((todo) => todo.completed === true);
-    setTodos(allTodos);
+    // setTodos(allTodos);
   };
   //  change theme
 
@@ -103,6 +111,7 @@ const App = () => {
             todos={todos}
             handleComplete={handleComplete}
             deleteTodo={deleteTodo}
+            setTodos={setTodos}
           />
           <TodoInfo
             getAllTodos={getAllTodos}
@@ -113,6 +122,7 @@ const App = () => {
           />
         </div>
       </div>
+      <span className="info__draggable"> Drag and drop to reorder list</span>
     </main>
   );
 };
