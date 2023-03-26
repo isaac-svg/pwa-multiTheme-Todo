@@ -8,10 +8,14 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "prompt",
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+      includeAssets: [
+        "favicon.ico",
+        "apple-touch-icon.png",
+        "maskable_icon.svg",
+      ],
       manifest: {
-        name: "websitename",
-        short_name: "websitename",
+        name: "TODO LIST",
+        short_name: "TODO",
         description:
           "Frontend Mentors installable Multi-theme Todo List application",
         theme_color: "#161722",
@@ -23,12 +27,12 @@ export default defineConfig({
             type: "image/png",
           },
           {
-            src: "maskable_icon(2).png",
+            src: "maskable_icon.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "maskable_icon(2).png",
+            src: "maskable_icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "any maskable",

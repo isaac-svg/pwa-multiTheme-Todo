@@ -11,13 +11,13 @@ export const Header = ({ lightTheme, toggleTheme }: props) => {
         {lightTheme ? (
           <img
             className="theme__img"
-            src="/public/images/icon-moon.svg"
+            src="/images/icon-moon.svg"
             onClick={toggleTheme}
           />
         ) : (
           <img
             className="theme__img"
-            src="/public/images/icon-sun.svg"
+            src="/images/icon-sun.svg"
             onClick={toggleTheme}
           />
         )}

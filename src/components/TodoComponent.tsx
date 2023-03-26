@@ -58,7 +58,7 @@ const TodoComponent = ({
                   className={`check__img  ${
                     todo.completed && "completed__img"
                   }`}
-                  src="/public/images/icon-check.svg"
+                  src="/images/icon-check.svg"
                 />
               </div>
 
