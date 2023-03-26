@@ -66,8 +66,6 @@ const App = () => {
     const modifiedTodo = todos.filter((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
-        console.log(todo.completed);
-        console.log(todo);
       }
 
       return todo;

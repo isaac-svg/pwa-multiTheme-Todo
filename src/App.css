@@ -37,9 +37,7 @@ img {
 }
 /* light Theme */
 .main.light {
-  /* background-color: rebeccapurple; */
   --very-dark-desaturated-blue: var(--very-light-gray);
-  /*  */
   background-color: var(--very-light-grayish-blue);
   --very-Dark-Grayish-blue: var(--very-light-grayish-blue);
   --light-grayish-blue: var(--Dark-grayish-blue);
