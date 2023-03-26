@@ -12,6 +12,12 @@ export default defineConfig({
         "favicon.ico",
         "apple-touch-icon.png",
         "maskable_icon.svg",
+        "/images/bg-desktop-dark.jpg",
+        "/images/bg-desktop-light.jpg",
+        "/images/bg-mobile-dark.jpg",
+        "/images/bg-mobile-light.jpg",
+        "/images/icon-check.svg",
+        "/images/icon-cross.svg",
       ],
       manifest: {
         name: "TODO LIST",
@@ -19,6 +25,7 @@ export default defineConfig({
         description:
           "Frontend Mentors installable Multi-theme Todo List application",
         theme_color: "#161722",
+        background_color: "#161722",
         start_url: "/",
         icons: [
           {
